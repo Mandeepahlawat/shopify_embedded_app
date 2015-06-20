@@ -1,0 +1,28 @@
+https://www.digitalocean.com/community/tutorials/deploying-a-rails-app-on-ubuntu-14-04-with-capistrano-nginx-and-puma
+
+postgres:
+	user: deploy
+	password: deploy
+
+	gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+	curl -sSL https://get.rvm.io | bash -s stable
+
+	source ~/.rvm/scripts/rvm
+
+	rvm requirements
+
+	rvm use 2.2.1 --default
+
+	gem install unicorn
+
+	adduser deploy
+	password: deploy
+
+	su - deploy
+
+	cd ~
+
+	mkdir .ssh
+
+	

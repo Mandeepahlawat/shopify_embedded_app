@@ -10,7 +10,10 @@ Rails.application.routes.draw do
 
   get "/index" => "home#index"
 
-  resources :form_attributes
+  resources :form_attributes, only: [:new, :create, :edit, :update]
+
+  resources :recommendations, only: [:index, :new, :create]
+  resources :customers,  only: :index
 
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -38,6 +38,15 @@ gem "shopify_app", "~> 6.0.0"
 gem "quiet_assets"
 gem "figaro"
 
+group :development do
+  gem 'capistrano-rails',   require: false
+  gem 'capistrano-bundler', require: false  
+  gem 'capistrano-rvm', require: false
+  # gem 'sepastian-capistrano3-unicorn', :require => false
+end
+
+gem 'unicorn'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

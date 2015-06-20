@@ -1,0 +1,22 @@
+= form_for form_attribute, html: {id: "form-snippet"} do |f|
+	- if form_attribute.errors.any?
+		#error_explanation
+			%h2
+				= pluralize(form_attribute.errors.count, "error")
+				prohibited it from being saved:
+			%ul
+				- form_attribute.errors.full_messages.each do |msg|
+					%li= msg
+	= f.label :width
+	= f.text_field :width, placeholder: "Enter width of input fields, e.g: 10px"
+	= f.label :border
+	= f.text_field :border, placeholder: "Enter border of input fields, e.g: 1px solid black or 1px solid #000000"
+	= f.label :color
+	= f.text_field :color, placeholder: "Enter color of text, e.g: black or #000000"
+	= f.label :background_color
+	= f.text_field :background_color, placeholder: "Enter background color, e.g: black or #000000"
+	= f.label :font_family
+	= f.text_field :font_family, placeholder: "Enter font family name, e.g: Arial"
+	= f.label :button_color
+	= f.text_field :button_color, placeholder: "Enter default color for buttons, e.g: black or #000000"
+	= f.submit "Save", class: "btn primary"

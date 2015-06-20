@@ -1,0 +1,17 @@
+%h1.center Recommend a Product
+= form_for @recommendation, html: {id: "recommendation-form", style: "font-family: #{@form_attribute.font_family}; color: #{@form_attribute.color}; background-color: #{@form_attribute.background_color}"} do |f|
+	- if @recommendation.errors.any?
+		#error_explanation
+			%h2
+				= pluralize(@recommendation.errors.count, "error")
+				prohibited it from being saved:
+			%ul
+				- @recommendation.errors.full_messages.each do |msg|
+					%li= msg
+	%label Select a Product you want to recommend
+	= f.select :shopify_product_id, @products.collect {|p| [ p.title, p.id ] }, {}, style: "width: #{@form_attribute.width}; border: #{@form_attribute.border}; color: #{@form_attribute.color}; font-family: #{@form_attribute.font_family};"
+	%label Email
+	= f.text_field :friend_email, placeholder: "Email of a friend you want to recommend a product.", required: true, style: "width: #{@form_attribute.width}; border: #{@form_attribute.border}; color: #{@form_attribute.color}; font-family: #{@form_attribute.font_family};"
+	= f.label :comment
+	= f.text_area :comment, placeholder: "Additional comments about the product", style: "width: #{@form_attribute.width}; border: #{@form_attribute.border}; color: #{@form_attribute.color}; font-family: #{@form_attribute.font_family};"
+	= f.submit "Send Recommendation", class: "btn primary", style: "background-color: #{@form_attribute.button_color}; color: #{@form_attribute.color}; font-family: #{@form_attribute.font_family};"

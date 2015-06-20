@@ -1,0 +1,13 @@
+%p
+	="Hello #{@email_address},"
+%p
+	= "#{@customer.full_name} has recommended a #{@product_title} to you."
+%p
+	Click 
+	= link_to "here", @product_url 
+	to see that product.
+
+%p 
+	Thanks
+%p
+	Admin

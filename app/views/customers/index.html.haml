@@ -1,0 +1,19 @@
+- if @customers.present?
+	.customers
+		- @customers.each_slice(3) do |customers|
+			.section-row
+				- customers.each do |customer|
+					.section-cell
+						%p 
+							= "Customer Name: #{customer.full_name}"
+						%p 
+							= "Customer Email: #{customer.email}"
+						%p 
+							= "Total Recommendations: #{customer.recommendations.count}"
+						%p 
+							Recommendations made are:
+							%ul
+								- customer.recommendations.each do |recommendation|
+									- product = ShopifyAPI::Product.find recommendation.shopify_product_id
+									%li 
+										= "Product: #{product.title} to Email: #{recommendation.friend_email}"

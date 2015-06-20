@@ -1,0 +1,13 @@
+- if @recommendations.present?
+	.recommendations
+		- @recommendations.each_slice(3) do |recommendations|
+			.section-row
+				- recommendations.each do |recommendation|
+					- product = ShopifyAPI::Product.find recommendation.shopify_product_id
+					.section-cell
+						%p 
+							= "Product Name: #{product.title}"
+						%p 
+							= "Recommended to: #{recommendation.friend_email}"
+						%p 
+							= "Recommended by: #{recommendation.customer.full_name}"

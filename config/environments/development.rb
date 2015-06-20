@@ -38,4 +38,18 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  config.action_mailer.default_url_options = { :host => 'localhost:3001' }
+
+  #Amazon SES configurations
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => "#{ENV['SES_SMTP_USERNAME']}",
+    :password => "#{ENV['SES_SMTP_PASSWORD']}",
+    :address => 'email-smtp.us-west-2.amazonaws.com',
+    :domain => '52.25.66.53',
+    :port => 587,
+    :authentication => :plain,
+    :enable_starttls_auto => true
+  }
 end

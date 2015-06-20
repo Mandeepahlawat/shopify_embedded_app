@@ -6,7 +6,6 @@
 #
 default: &default
   adapter: postgresql
-  database: grambam_dev
   pool: 5
   host: localhost
   username: postgres
