@@ -13,6 +13,7 @@ class RecommendationsController < ApplicationController
     @form_attribute       = @shop.form_attribute
     session[:customer_id] = @customer.id
     @products             = ShopifyAPI::Product.all
+    render content_type: 'application/liquid'
   end
 
   def create
