@@ -65,8 +65,8 @@ namespace :deploy do
       puts "whats running before, eh unicorn?"
       execute "ps aux | grep unicorn"    
       puts "restarting unicorn..."
-      # execute "service unicorn restart"
-      invoke 'unicorn:reload'
+      execute "service unicorn restart"
+      #invoke 'unicorn:reload'
       # puts "whats running after, eh unicorn?"
       # execute "ps aux | grep unicorn"
       # invoke 'delayed_job:start' 
