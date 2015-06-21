@@ -17,3 +17,5 @@
 									- product = ShopifyAPI::Product.find recommendation.shopify_product_id
 									%li 
 										= "Product: #{product.title} to Email: #{recommendation.friend_email}"
+- else 
+	%h1 There are no customers who recommended any products.
