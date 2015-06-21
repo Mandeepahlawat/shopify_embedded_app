@@ -1,4 +1,4 @@
-root = "/home/ubuntu/apps/microapps_task/current"
+root = "/home/ubuntu/microapps_task/current"
 working_directory root
 
 pid "#{root}/tmp/pids/unicorn.pid"
@@ -11,7 +11,7 @@ worker_processes 4
 timeout 30
 preload_app true
 
-listen '/tmp/unicorn.spui.sock', backlog: 64
+listen '/tmp/unicorn.microapps_task.sock', backlog: 64
 
 before_fork do |server, worker|
   Signal.trap 'TERM' do
