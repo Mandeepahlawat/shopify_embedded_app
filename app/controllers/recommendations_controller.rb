@@ -1,5 +1,6 @@
 class RecommendationsController < ApplicationController
-  #around_filter :shopify_session, except: :new
+  before_filter :set_shop_session_from_store, only: :new
+  around_filter :shopify_session
   before_filter :set_shop
   before_filter :create_or_set_customer, only: [:new, :create]
   layout 'embedded_app'
@@ -13,7 +14,7 @@ class RecommendationsController < ApplicationController
     @form_attribute       = @shop.form_attribute
     session[:customer_id] = @customer.id
     @products             = ShopifyAPI::Product.all
-    render render: "new", layout: false, content_type: "application/liquid" if Rails.env.production?
+    render render: "new", content_type: "application/liquid" if Rails.env.production?
   end
 
   def create
@@ -28,9 +29,19 @@ class RecommendationsController < ApplicationController
 
   private
 
+    def set_shop_session_from_store
+      @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
+      @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
+    end
+
+    def set_shopify_session
+      sess = ShopifyAPI::Session.new(@shop.shopify_domain, @shop.shopify_token)
+      session[:shopify] = ShopifyApp::SessionRepository.store(sess)
+      session[:shopify_domain] = @shop.shopify_domain
+    end
+
   	def set_shop
   		@shop = Shop.find_by_shopify_domain @shop_session.url if @shop_session
-      @shop = Shop.find_by_shopify_domain params[:shop] if params[:shop]
       redirect_to root_url, notice: "Not Authorized" unless @shop
   	end
 
