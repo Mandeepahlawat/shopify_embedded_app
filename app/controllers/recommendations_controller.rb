@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-  before_filter :set_shop_session_from_store, only: :new
+  #before_filter :set_shop_session_from_store, only: :new
   around_filter :shopify_session
   before_filter :set_shop
   before_filter :create_or_set_customer, only: [:new, :create]
@@ -28,18 +28,18 @@ class RecommendationsController < ApplicationController
 
   private
 
-    def set_shop_session_from_store
-      unless @shop_session
-        @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
-        @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
-      end
-    end
+    # def set_shop_session_from_store
+    #   unless @shop_session
+    #     @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
+    #     @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
+    #   end
+    # end
 
-    def set_shopify_session
-      sess = ShopifyAPI::Session.new(@shop.shopify_domain, @shop.shopify_token)
-      session[:shopify] = ShopifyApp::SessionRepository.store(sess)
-      session[:shopify_domain] = @shop.shopify_domain
-    end
+    # def set_shopify_session
+    #   sess = ShopifyAPI::Session.new(@shop.shopify_domain, @shop.shopify_token)
+    #   session[:shopify] = ShopifyApp::SessionRepository.store(sess)
+    #   session[:shopify_domain] = @shop.shopify_domain
+    # end
 
   	def set_shop
   		@shop = Shop.find_by_shopify_domain @shop_session.url if @shop_session
