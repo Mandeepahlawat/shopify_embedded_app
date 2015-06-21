@@ -10,6 +10,8 @@ Rails.application.routes.draw do
 
   get "/index" => "home#index"
 
+  get "/apps/recommend-product" => "recommendations#new"
+
   resources :form_attributes, only: [:new, :create, :edit, :update]
 
   resources :recommendations, only: [:index, :new, :create]

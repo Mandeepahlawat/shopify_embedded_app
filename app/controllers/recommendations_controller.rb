@@ -14,7 +14,7 @@ class RecommendationsController < ApplicationController
     @form_attribute       = @shop.form_attribute
     session[:customer_id] = @customer.id
     @products             = ShopifyAPI::Product.all
-    #render render: "new", content_type: "application/liquid" if Rails.env.production?
+    render render: "new", content_type: "application/liquid" if Rails.env.production?
   end
 
   def create
@@ -30,8 +30,10 @@ class RecommendationsController < ApplicationController
   private
 
     def set_shop_session_from_store
-      @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
-      @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
+      unless @shop_session
+        @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
+        @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
+      end
     end
 
     def set_shopify_session
