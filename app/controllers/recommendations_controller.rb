@@ -13,7 +13,7 @@ class RecommendationsController < ApplicationController
     @form_attribute       = @shop.form_attribute
     session[:customer_id] = @customer.id
     @products             = ShopifyAPI::Product.all
-    render content_type: 'application/liquid'
+    render render: "new", layout: false, content_type: "application/liquid" if Rails.env.production?
   end
 
   def create
@@ -36,6 +36,7 @@ class RecommendationsController < ApplicationController
   		@customer = Customer.find_by_shopify_customer_id params[:id] if params[:id]
       @customer = Customer.find_by_id session[:customer_id] if session[:customer_id]
       @customer = @shop.create_new_customer params[:id] unless @customer
+      redirect_to root_url, notice: "Not Authorized" unless @customer
   	end
 
   	def recommendation_params
