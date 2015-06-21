@@ -1,5 +1,5 @@
 class RecommendationsController < ApplicationController
-  around_filter :shopify_session
+  around_filter :shopify_session, except: :new
   before_filter :set_shop
   before_filter :create_or_set_customer, only: [:new, :create]
   layout 'embedded_app'
@@ -29,7 +29,9 @@ class RecommendationsController < ApplicationController
   private
 
   	def set_shop
-  		@shop = Shop.find_by_shopify_domain @shop_session.url
+  		@shop = Shop.find_by_shopify_domain if @shop_session.url
+      @shop = Shop.find_by_shopify_domain params[:shop] if params[:shop]
+      redirect_to root_url, notice: "Not Authorized" unless @shop
   	end
 
   	def create_or_set_customer
