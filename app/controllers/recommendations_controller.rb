@@ -14,7 +14,6 @@ class RecommendationsController < ApplicationController
     @form_attribute       = @shop.form_attribute
     session[:customer_id] = @customer.id
     @products             = ShopifyAPI::Product.all
-    render render: "new", content_type: "application/liquid" if Rails.env.production?
   end
 
   def create
