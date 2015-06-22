@@ -8,7 +8,6 @@ class RecommendationsController < ApplicationController
 
   def index
     @recommendations = @shop.recommendations
-    layout
   end
 
   def new
