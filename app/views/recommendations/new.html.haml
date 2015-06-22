@@ -1,5 +1,5 @@
-%h1.center Recommend a Product
-= form_for @recommendation, html: {id: "recommendation-form", style: (form_styles(@form_attribute) + "padding:10px;")} do |f|
+%h1.center{style: "font-size: 24px;text-align: center;"} Recommend a Product
+= form_for @recommendation, html: {id: "recommendation-form", style: (form_styles(@form_attribute) + "padding:10px;width: 98%;margin: auto;")} do |f|
 	- if @recommendation.errors.any?
 		#error_explanation
 			%h2
@@ -8,13 +8,13 @@
 			%ul
 				- @recommendation.errors.full_messages.each do |msg|
 					%li= msg
-	%div
+	%div{style: "margin: 10px 0"}
 		%label Select a Product you want to recommend
 		= f.select :shopify_product_id, @products.collect {|p| [ p.title, p.id ] }, {}, style: input_styles(@form_attribute)
-	%div
+	%div{style: "margin: 10px 0"}
 		%label Email
 		= f.text_field :friend_email, placeholder: "Email of a friend you want to recommend a product.", required: true, style: input_styles(@form_attribute)
-	%div
+	%div{style: "margin: 10px 0 20px"}
 		= f.label :comment
 		= f.text_area :comment, placeholder: "Additional comments about the product", style: input_styles(@form_attribute) 
 	= f.submit "Send Recommendation", class: "btn primary", style: button_styles(@form_attribute)
