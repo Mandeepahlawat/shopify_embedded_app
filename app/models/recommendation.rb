@@ -2,6 +2,7 @@ class Recommendation < ActiveRecord::Base
 	belongs_to :customer
 
 	validates :shopify_product_id, :friend_email, presence: true
+	validates :friend_email, format: {with: /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/}
 
 	def send_recommendation_email
 		product_title, product_url, product_price, product_desc = product_url_and_title shopify_product_id
