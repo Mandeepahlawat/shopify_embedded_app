@@ -1,7 +1,7 @@
 class RecommendationsController < ApplicationController
-  before_filter :set_shop_session_from_store, only: :new
-  around_filter :shopify_session
-  before_filter :set_shop
+  before_filter :set_shop_session_from_store, except: :new
+  around_filter :shopify_session, except: :new
+  before_filter :set_shop, except: :new
   before_filter :create_or_set_customer, only: [:new, :create]
   layout 'embedded_app'
 
@@ -10,10 +10,10 @@ class RecommendationsController < ApplicationController
   end
 
   def new
-    @recommendation       = @customer.recommendations.build
-    @form_attribute       = @shop.form_attribute
-    session[:customer_id] = @customer.id
-    @products             = ShopifyAPI::Product.all
+    # @recommendation       = @customer.recommendations.build
+    # @form_attribute       = @shop.form_attribute
+    # session[:customer_id] = @customer.id
+    # @products             = ShopifyAPI::Product.all
   end
 
   def create

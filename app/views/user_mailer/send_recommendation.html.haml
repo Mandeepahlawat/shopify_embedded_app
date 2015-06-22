@@ -2,10 +2,15 @@
 	="Hello #{@email_address},"
 %p
 	= "#{@customer.full_name} has recommended a #{@product_title} to you."
+- if @comment
+	%p
+		= "#{@customer.full_name} says:" 
+	%p 
+		= @comment
 %p
-	Click 
+	= "#{@product_title}, #{@product_desc}, is priced at $#{@product_price}" 
 	= link_to "here", @product_url 
-	to see that product.
+	to see all details.
 
 %p 
 	Thanks
