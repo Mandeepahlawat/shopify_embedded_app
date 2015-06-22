@@ -31,14 +31,12 @@ class RecommendationsController < ApplicationController
 
     def set_shop_session_from_store
       unless @shop_session
-        debugger
         @shop = Shop.find_by_shopify_domain(params[:shop]) if params[:shop]
         @shop ? set_shopify_session : (redirect_to root_url, notice: "Not Authorized")
       end
     end
 
     def set_shopify_session
-      debugger
       sess = ShopifyAPI::Session.new(@shop.shopify_domain, @shop.shopify_token)
       session[:shopify] = ShopifyApp::SessionRepository.store(sess)
       session[:shopify_domain] = @shop.shopify_domain
