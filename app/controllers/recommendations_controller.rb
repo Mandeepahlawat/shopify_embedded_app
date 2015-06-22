@@ -3,7 +3,7 @@ class RecommendationsController < ApplicationController
   before_filter :set_shop_session_from_store, only: [:new, :create]
   around_filter :shopify_session
   before_filter :set_shop
-  before_filter :create_or_set_customer, only: [:new, :create]
+  before_filter :create_or_set_customer, only: :new
   layout 'embedded_app'
 
   def index
