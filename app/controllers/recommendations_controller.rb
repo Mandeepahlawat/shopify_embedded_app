@@ -1,9 +1,9 @@
 class RecommendationsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_filter :set_shop_session_from_store, only: :new
+  before_filter :set_shop_session_from_store, only: [:new, :create]
   around_filter :shopify_session
-  before_filter :set_shop, except: :create
-  before_filter :create_or_set_customer, only: :new
+  before_filter :set_shop
+  before_filter :create_or_set_customer, only: [:new, :create]
   layout 'embedded_app'
 
   def index
@@ -20,7 +20,7 @@ class RecommendationsController < ApplicationController
   end
 
   def create
-  	@recommendation = Recommendation.new(recommendation_params)
+  	@recommendation = @customer.recommendations.build(recommendation_params)
   	if @recommendation.save
       @recommendation.send_recommendation_email
       redirect_to "http://#{@shop.shopify_domain}", notice: "Product Recommendation is sent."
