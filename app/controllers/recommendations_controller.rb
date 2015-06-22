@@ -4,7 +4,7 @@ class RecommendationsController < ApplicationController
   around_filter :shopify_session, except: :create
   before_filter :set_shop, except: :create
   before_filter :create_or_set_customer, only: :new
-  layout 'embedded_app', except: [:new, :create]
+  layout 'embedded_app'
 
   def index
     @recommendations = @shop.recommendations
