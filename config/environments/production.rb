@@ -78,6 +78,7 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   #Amazon SES configurations
+  config.action_mailer.default_url_options = { :host => 'http://52.25.66.53' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
     :user_name => "#{ENV['SES_SMTP_USERNAME']}",
