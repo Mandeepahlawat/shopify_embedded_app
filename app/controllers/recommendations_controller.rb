@@ -21,7 +21,8 @@ class RecommendationsController < ApplicationController
   	@recommendation = @customer.recommendations.build(recommendation_params)
   	if @recommendation.save
       @recommendation.send_recommendation_email
-  		redirect_to new_recommendation_path(shop: @shop.shopify_domain), notice: "Product Recommendation is sent."
+      redirect_to "/#{@shop.shopify_domain}", notice: "Product Recommendation is sent."
+  		#redirect_to new_recommendation_path(shop: @shop.shopify_domain), notice: "Product Recommendation is sent."
   	else
   		render "new"
   	end
