@@ -10,7 +10,7 @@
 					%li= msg
 	%div{style: "margin: 10px 0"}
 		%label Select a Product you want to recommend
-		-# = f.hidden_field :customer_id, value: @customer.id
+		= f.hidden_field :customer_id, value: @customer.id
 		= hidden_field_tag :shop, @shop.shopify_domain
 		= f.select :shopify_product_id, @products.collect {|p| [ p.title, p.id ] }, {}, style: input_styles(@form_attribute)
 	%div{style: "margin: 10px 0"}
