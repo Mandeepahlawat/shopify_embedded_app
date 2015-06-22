@@ -1,6 +1,6 @@
 module ApplicationHelper
 	def form_styles form_attribute
-		"font-family: #{form_attribute.font_family}; color: #{form_attribute.color}; background-color: #{form_attribute.background_color}"	if form_attribute
+		"font-family: #{form_attribute.font_family}; color: #{form_attribute.color}; background-color: #{form_attribute.background_color};"	if form_attribute
 	end
 
 	def input_styles form_attribute
