@@ -9,9 +9,9 @@
 				- @recommendation.errors.full_messages.each do |msg|
 					%li= msg
 	%label Select a Product you want to recommend
-	= f.select :shopify_product_id, @products.collect {|p| [ p.title, p.id ] }, {}, html: {style: input_styles(@form_attribute)}
+	= f.select :shopify_product_id, @products.collect {|p| [ p.title, p.id ] }, {}, style: input_styles(@form_attribute)
 	%label Email
-	= f.text_field :friend_email, placeholder: "Email of a friend you want to recommend a product.", required: true, html: {style: input_styles(@form_attribute)} 
+	= f.text_field :friend_email, placeholder: "Email of a friend you want to recommend a product.", required: true, style: input_styles(@form_attribute)
 	= f.label :comment
-	= f.text_area :comment, placeholder: "Additional comments about the product", html: {style: input_styles(@form_attribute)} 
-	= f.submit "Send Recommendation", class: "btn primary", html: { style: button_styles(@form_attribute)}
+	= f.text_area :comment, placeholder: "Additional comments about the product", style: input_styles(@form_attribute) 
+	= f.submit "Send Recommendation", class: "btn primary", style: button_styles(@form_attribute)
