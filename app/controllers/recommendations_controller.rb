@@ -1,4 +1,5 @@
 class RecommendationsController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_filter :set_shop_session_from_store, only: :new
   around_filter :shopify_session
   before_filter :set_shop
