@@ -1,5 +1,5 @@
 %h1.center Recommend a Product
-= form_for @recommendation, html: {id: "recommendation-form", style: form_styles(@form_attribute)} do |f|
+= form_for @recommendation, html: {id: "recommendation-form", style: (form_styles(@form_attribute)} + "padding:10px;") do |f|
 	- if @recommendation.errors.any?
 		#error_explanation
 			%h2
