@@ -1,5 +1,5 @@
 %h1.center{style: "font-size: 24px;text-align: center;"} Recommend a Product
-= form_for @recommendation, url: recommendations_url , html: {id: "recommendation-form", style: (form_styles(@form_attribute) + "padding:10px;width: 98%;margin: auto;")} do |f|
+= form_for @recommendation, url: "http://52.25.66.53/recommendations" , html: {id: "recommendation-form", style: (form_styles(@form_attribute) + "padding:10px;width: 98%;margin: auto;")} do |f|
 	- if @recommendation.errors.any?
 		#error_explanation
 			%h2
